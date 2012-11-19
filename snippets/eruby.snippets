@@ -50,8 +50,12 @@ snippet cs
 snippet ct
 	<%= content_tag '${1:DIV}', ${2:content}${3:,options} %>
 snippet ff
-	<% form_for @${1:model} do |f| %>
+	<%= form_for @${1:model} do |f| %>
 		${2}
+	<% end %>
+snippet ft
+	<%= form_tag ${1:model}s_path@${2:model} do %>
+		${3}
 	<% end %>
 snippet ffcb
 	<%= ${1:f}.check_box :${2:attribute} %>
@@ -66,24 +70,26 @@ snippet ffff
 snippet ffhf
 	<%= ${1:f}.hidden_field :${2:attribute} %>
 snippet ffl
-	<%= ${1:f}.label :${2:attribute}, '${3:$2}' %>
+	<%= ${1:f}.label :${2:attribute} %>
+snippet ftl
+	<%= label_tag '${1}' %>
 snippet ffpf
 	<%= ${1:f}.password_field :${2:attribute} %>
 snippet ffrb
 	<%= ${1:f}.radio_button :${2:attribute}, :${3:tag_value} %>
 snippet ffs
 	<%= ${1:f}.submit "${2:submit}" %>
+snippet fts
+	<%= submit_tag "${1:submit}" %>
 snippet ffta
 	<%= ${1:f}.text_area :${2:attribute} %>
 snippet fftf
 	<%= ${1:f}.text_field :${2:attribute} %>
+snippet fttf
+	<%= text_field_tag "${1:text}", :${2:attribute} %>
 snippet fields
 	<% fields_for :${1:model}, @$1 do |${2:f}| %>
 		${3}
-	<% end %>
-snippet ff
-	<%= form_for @${1:model} do |f| %>
-		${2}
 	<% end %>
 snippet i18
 	I18n.t('${1:type.key}')${2}

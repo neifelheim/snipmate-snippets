@@ -26,8 +26,10 @@ snippet beg
 	rescue ${1:Exception} => ${2:e}
 	end
 
-snippet req
+snippet req require
 	require "${1}"${2}
+snippet inc
+	include "${1}"  
 snippet #
 	# =>
 snippet end
@@ -43,6 +45,10 @@ snippet when
 snippet def
 	def ${1:method_name}
 		${2}
+	end
+snippet defp
+	def ${1:method_name}(${2})
+		${3}
 	end
 snippet deft
 	def test_${1:case_name}
@@ -361,6 +367,8 @@ snippet max
 	max { |a, b| ${1} }
 snippet min
 	min { |a, b| ${1} }
+snippet pv
+	private
 snippet par
 	partition { |${1:e}| ${2} }
 snippet pard
@@ -373,6 +381,12 @@ snippet rejd
 	reject do |${1:e}|
 		${2}
 	end
+snippet se
+	should eql(${1})
+snippet sne
+	should_not be_eql(${1})
+snippet sbn
+	should be_nil
 snippet sel
 	select { |${1:e}| ${2} }
 snippet seld
@@ -394,7 +408,7 @@ snippet :
 snippet ope
 	open(${1:"path/or/url/or/pipe"}, "${2:w}") { |${3:io}| ${4} }
 # path_from_here()
-snippet patfh
+snippet fpath
 	File.join(File.dirname(__FILE__), *%2[${1:rel path here}])${2}
 # unix_filter {}
 snippet unif
@@ -430,7 +444,9 @@ snippet ts
 	require "tc_${1:test_case_file}"
 	require "tc_${2:test_case_file}"${3}
 snippet as
-	assert ${1:test}, "${2:Failure message.}"${3}
+	assert ${1:test}
+snippet asq
+	assert ${1:test}, "${2}"
 snippet ase
 	assert_equal ${1:expected}, ${2:actual}${3}
 snippet asne
@@ -532,6 +548,8 @@ snippet tas
 # block
 snippet b
 	{ |${1:var}| ${2} }
+snippet be
+	{ ${1} }
 snippet begin
 	begin
 		raise 'A test exception.'
@@ -575,8 +593,8 @@ snippet asre
 	assert_response :${1:success}, @response.body${2}
 snippet asrj
 	assert_rjs :${1:replace}, "${2:dom id}"
-snippet ass
-	assert_select '${1:path}', :${2:text} => '${3:inner_html' ${4:do}
+snippet ass assert_select(..)
+	assert_select '${1:path}', ${2}
 snippet bf
 	before_filter :${1:method}
 snippet bt
@@ -656,6 +674,8 @@ snippet defupdate
 	end${3}
 snippet flash
 	flash[:${1:notice}] = "${2}"
+snippet flashe
+	flash[:${1:error}] = "${2}"
 snippet habtm
 	has_and_belongs_to_many :${1:object}, :join_table => "${2:table_name}", :foreign_key => "${3}_id"${4}
 snippet hm
@@ -692,6 +712,8 @@ snippet mapr
 	${1:map}.resource :${2:resource}
 snippet maprs
 	${1:map}.resources :${2:resource}
+snippet res
+	resources :${1:controller}	
 snippet mapwo
 	${1:map}.with_options :${2:controller} => '${3:thing}' do |$3|
 		${4}
@@ -717,6 +739,10 @@ snippet ra
 snippet ral
 	render :action => "${1:action}", :layout => "${2:layoutname}"
 snippet rest
+	respond_to :${1}
+snippet resw
+	respond_with(${1})
+snippet restw
 	respond_to do |wants|
 		wants.${1:html} { ${2} }
 	end
@@ -866,7 +892,7 @@ snippet xpost
 snippet xput
 	xhr :put, :${1:update}, :id => ${2:1}, :${3:object} => { ${4} }${5}
 snippet test
-	test "should ${1:do something}" do
+	test "${1:do something}" do
 		${2}
 	end
 #migrations
@@ -919,10 +945,37 @@ snippet cont
 		${2}
 	end
 snippet bef
-	before :${1:each} do
-		${2}
+	before do
+		${1}
 	end
 snippet aft
 	after :${1:each} do
 		${2}
 	end
+snippet let
+	let(:${1:model}) { ${2} }
+snippet lrs
+	last_response.status${1}
+snippet lrh
+	last_response.headers${1}
+snippet lrb
+	last_response.body${1}
+snippet lrc
+	last_response.code${1}
+#extras
+snippet rcar
+	rescue ActiveRecord::RecordNotFound
+snippet red
+	redirect_to ${1:model}_path
+snippet ac
+	after_create :${1:method}
+snippet bc
+	before_create :${1:method}
+snippet bs
+	before_save :${1:method}
+#factory
+snippet fact
+	Factory.define :${1:model} do |${2:model}|
+	end
+
+	
