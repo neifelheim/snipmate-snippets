@@ -29,6 +29,8 @@ snippet rps
 	<%= render :partial => '${1:item}', :status => ${2:500} %>
 snippet rpc
 	<%= render :partial => '${1:item}', :collection => ${2:items} %>
+snippet btt
+	<%= button_to '${1:button text...}', :action => '${2:index}' %>
 snippet lia
 	<%= link_to '${1:link text...}', :action => '${2:index}' %>
 snippet liai
@@ -70,7 +72,7 @@ snippet ffff
 snippet ffhf
 	<%= ${1:f}.hidden_field :${2:attribute} %>
 snippet ffl
-	<%= ${1:f}.label :${2:attribute} %>
+	<%= ${1:f}.label '${2:attribute}' %>
 snippet ftl
 	<%= label_tag '${1}' %>
 snippet ffpf
@@ -84,7 +86,7 @@ snippet fts
 snippet ffta
 	<%= ${1:f}.text_area :${2:attribute} %>
 snippet fftf
-	<%= ${1:f}.text_field :${2:attribute} %>
+	<%= ${1:f}.text_field :billing_${2:attribute} %>
 snippet fttf
 	<%= text_field_tag "${1:text}", :${2:attribute} %>
 snippet fields

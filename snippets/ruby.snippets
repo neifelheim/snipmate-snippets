@@ -79,6 +79,10 @@ snippet for
 	for ${1:e} in ${2:c}
 		${3}
 	end
+snippet f
+	find(${1})
+snippet fp
+	find(params[:${1}])
 snippet until
 	until ${1:condition}
 		${2}
@@ -597,6 +601,10 @@ snippet ass assert_select(..)
 	assert_select '${1:path}', ${2}
 snippet bf
 	before_filter :${1:method}
+snippet bfo
+	before_filter :${1:method}, :only => [:${2}]
+snippet bfe
+	before_filter :${1:method}, :except => [:${2}]
 snippet bt
 	belongs_to :${1:association}
 snippet crw
@@ -977,5 +985,6 @@ snippet bs
 snippet fact
 	Factory.define :${1:model} do |${2:model}|
 	end
-
+snippet ua
+	update_attribute(:${1:attribute_name}, ${2:value})
 	
