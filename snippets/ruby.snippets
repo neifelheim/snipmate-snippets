@@ -11,6 +11,8 @@ snippet #!
 	#!/usr/bin/env ruby
 	# encoding: utf-8
 
+snippet =
+	${1:variable} = ${2:value}
 # New Block
 snippet =b
 	=begin rdoc
@@ -184,6 +186,10 @@ snippet Forw-
 # def self
 snippet defs
 	def self.${1:class_method_name}
+		${2}
+	end
+snippet defi
+	def initialize(${1})
 		${2}
 	end
 # def method_missing
@@ -371,6 +377,10 @@ snippet max
 	max { |a, b| ${1} }
 snippet min
 	min { |a, b| ${1} }
+snippet p
+	puts ${1}
+snippet pu
+	puts "${1}"
 snippet pv
 	private
 snippet par
@@ -617,10 +627,8 @@ snippet defcreate
 			if @$1.save
 				flash[:notice] = '$2 was successfully created.'
 				wants.html { redirect_to(@$1) }
-				wants.xml  { render :xml => @$1, :status => :created, :location => @$1 }
 			else
 				wants.html { render :action => "new" }
-				wants.xml  { render :xml => @$1.errors, :status => :unprocessable_entity }
 			end
 		end
 	end${3}
@@ -944,6 +952,8 @@ snippet it
 snippet itp
 	it "${1:spec_name}"
 	${2}
+snippet itb
+	it { ${1} }
 snippet desc
 	describe ${1:class_name} do
 		${2}
@@ -955,6 +965,14 @@ snippet cont
 snippet bef
 	before do
 		${1}
+	end
+snippet rbf
+	before(:${1}) do
+		${2}
+	end
+snippet raf
+	after(:${1}) do
+		${2}
 	end
 snippet aft
 	after :${1:each} do
@@ -987,4 +1005,33 @@ snippet fact
 	end
 snippet ua
 	update_attribute(:${1:attribute_name}, ${2:value})
-	
+snippet fm
+	failure_message_for_should do |actual|
+		${1}
+	end	
+snippet fmn
+	failure_message_for_should_not do |actual|
+		${1}
+	end	
+snippet reqx
+	require "rspec/expectations"
+snippet rmd
+	RSpec::Matchers.define :${1:matcher_name} do |${2:expected}|
+		${3}
+	end
+snippet se
+	shared_examples "${1}" do
+		${2}
+	end
+snippet exp
+	expect(${1})
+snippet eo
+	error_on(:${1:attribute})
+snippet rsh
+	require "spec_helper"
+snippet rsc
+	RSpec.configure do |c|
+		c.${1}
+	end
+snippet new
+	${1:reference} = ${2:ClassName}.new(${3:params})
