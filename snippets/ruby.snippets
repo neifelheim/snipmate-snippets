@@ -11,6 +11,8 @@ snippet #!
 	#!/usr/bin/env ruby
 	# encoding: utf-8
 
+snippet =
+	${1:variable} = ${2:value}
 # New Block
 snippet =b
 	=begin rdoc
@@ -28,6 +30,8 @@ snippet beg
 
 snippet req require
 	require "${1}"${2}
+snippet inc
+	include "${1}"  
 snippet #
 	# =>
 snippet end
@@ -43,6 +47,10 @@ snippet when
 snippet def
 	def ${1:method_name}
 		${2}
+	end
+snippet defp
+	def ${1:method_name}(${2})
+		${3}
 	end
 snippet deft
 	def test_${1:case_name}
@@ -73,6 +81,10 @@ snippet for
 	for ${1:e} in ${2:c}
 		${3}
 	end
+snippet f
+	find(${1})
+snippet fp
+	find(params[:${1}])
 snippet until
 	until ${1:condition}
 		${2}
@@ -174,6 +186,10 @@ snippet Forw-
 # def self
 snippet defs
 	def self.${1:class_method_name}
+		${2}
+	end
+snippet defi
+	def initialize(${1})
 		${2}
 	end
 # def method_missing
@@ -367,6 +383,12 @@ snippet max
 	max { |a, b| ${1} }
 snippet min
 	min { |a, b| ${1} }
+snippet p
+	puts ${1}
+snippet pu
+	puts "${1}"
+snippet pv
+	private
 snippet par
 	partition { |${1:e}| ${2} }
 snippet pard
@@ -379,6 +401,12 @@ snippet rejd
 	reject do |${1:e}|
 		${2}
 	end
+snippet se
+	should eql(${1})
+snippet sne
+	should_not be_eql(${1})
+snippet sbn
+	should be_nil
 snippet sel
 	select { |${1:e}| ${2} }
 snippet seld
@@ -436,7 +464,9 @@ snippet ts
 	require "tc_${1:test_case_file}"
 	require "tc_${2:test_case_file}"${3}
 snippet as
-	assert ${1:test}, "${2:Failure message.}"${3}
+	assert ${1:test}
+snippet asq
+	assert ${1:test}, "${2}"
 snippet ase
 	assert_equal ${1:expected}, ${2:actual}${3}
 snippet asne
@@ -538,6 +568,8 @@ snippet tas
 # block
 snippet b
 	{ |${1:var}| ${2} }
+snippet be
+	{ ${1} }
 snippet begin
 	begin
 		raise 'A test exception.'
@@ -581,10 +613,12 @@ snippet asre
 	assert_response :${1:success}, @response.body${2}
 snippet asrj
 	assert_rjs :${1:replace}, "${2:dom id}"
-snippet ass assert_select(..)
-	assert_select '${1:path}', :${2:text} => '${3:inner_html' ${4:do}
 snippet bf
 	before_filter :${1:method}
+snippet bfo
+	before_filter :${1:method}, :only => [:${2}]
+snippet bfe
+	before_filter :${1:method}, :except => [:${2}]
 snippet bt
 	belongs_to :${1:association}
 snippet crw
@@ -597,10 +631,8 @@ snippet defcreate
 			if @$1.save
 				flash[:notice] = '$2 was successfully created.'
 				wants.html { redirect_to(@$1) }
-				wants.xml  { render :xml => @$1, :status => :created, :location => @$1 }
 			else
 				wants.html { render :action => "new" }
-				wants.xml  { render :xml => @$1.errors, :status => :unprocessable_entity }
 			end
 		end
 	end${3}
@@ -666,6 +698,8 @@ snippet dele delegate .. to .. prefix .. allow_nil
 	delegate :${1:methods}, :to => :${2:object}, :prefix => :${3:prefix}, :allow_nil => ${4:allow_nil}
 snippet flash
 	flash[:${1:notice}] = "${2}"
+snippet flashe
+	flash[:${1:error}] = "${2}"
 snippet habtm
 	has_and_belongs_to_many :${1:object}, :join_table => "${2:table_name}", :foreign_key => "${3}_id"${4}
 snippet hm
@@ -702,6 +736,8 @@ snippet mapr
 	${1:map}.resource :${2:resource}
 snippet maprs
 	${1:map}.resources :${2:resource}
+snippet res
+	resources :${1:controller}	
 snippet mapwo
 	${1:map}.with_options :${2:controller} => '${3:thing}' do |$3|
 		${4}
@@ -727,6 +763,10 @@ snippet ra
 snippet ral
 	render :action => "${1:action}", :layout => "${2:layoutname}"
 snippet rest
+	respond_to :${1}
+snippet resw
+	respond_with(${1})
+snippet restw
 	respond_to do |wants|
 		wants.${1:html} { ${2} }
 	end
@@ -876,7 +916,7 @@ snippet xpost
 snippet xput
 	xhr :put, :${1:update}, :id => ${2:1}, :${3:object} => { ${4} }${5}
 snippet test
-	test "should ${1:do something}" do
+	test "${1:do something}" do
 		${2}
 	end
 #migrations
@@ -922,6 +962,8 @@ snippet itp
 	${2}
 snippet its
 	its(:${1:method}) { should ${2} }
+snippet itb
+	it { ${1} }
 snippet desc
 	describe ${1:class_name} do
 		${2}
@@ -931,7 +973,15 @@ snippet cont
 		${2}
 	end
 snippet bef
-	before :${1:each} do
+	before do
+		${1}
+	end
+snippet rbf
+	before(:${1}) do
+		${2}
+	end
+snippet raf
+	after(:${1}) do
 		${2}
 	end
 snippet aft
@@ -939,7 +989,7 @@ snippet aft
 		${2}
 	end
 snippet let
-	let(:${1:method}) { ${2} }
+	let(:${1:model}) { ${2} }
 snippet subj
 	subject { ${1} }
 snippet spec
@@ -954,3 +1004,58 @@ snippet shared
 	shared_examples "${1:shared examples name}" ${2}
 snippet itb
 	it_behaves_like "${1:shared examples name}"${2}
+snippet lrs
+	last_response.status${1}
+snippet lrh
+	last_response.headers${1}
+snippet lrb
+	last_response.body${1}
+snippet lrc
+	last_response.code${1}
+#extras
+snippet rcar
+	rescue ActiveRecord::RecordNotFound
+snippet red
+	redirect_to ${1:model}_path
+snippet ac
+	after_create :${1:method}
+snippet bc
+	before_create :${1:method}
+snippet bs
+	before_save :${1:method}
+#factory
+snippet fact
+	Factory.define :${1:model} do |${2:model}|
+	end
+snippet ua
+	update_attribute(:${1:attribute_name}, ${2:value})
+snippet fm
+	failure_message_for_should do |actual|
+		${1}
+	end	
+snippet fmn
+	failure_message_for_should_not do |actual|
+		${1}
+	end	
+snippet reqx
+	require "rspec/expectations"
+snippet rmd
+	RSpec::Matchers.define :${1:matcher_name} do |${2:expected}|
+		${3}
+	end
+snippet se
+	shared_examples "${1}" do
+		${2}
+	end
+snippet exp
+	expect(${1})
+snippet eo
+	error_on(:${1:attribute})
+snippet rsh
+	require "spec_helper"
+snippet rsc
+	RSpec.configure do |c|
+		c.${1}
+	end
+snippet new
+	${1:reference} = ${2:ClassName}.new(${3:params})

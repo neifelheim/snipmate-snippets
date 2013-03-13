@@ -154,3 +154,41 @@ snippet sing
 
 		return instance;
 	}
+snippet var
+	var ${1} = ${2};
+
+#canvas
+snippet fS
+	fillStyle = '${1}';
+snippet fR
+	fillRect(${1},${2},${3},${4});
+snippet fT
+	fillText(${1},${2},${3});
+snippet cw
+	canvas.width${1}
+snippet ch
+	canvas.height${1}
+snippet mT
+	measureText(${1});
+snippet cLG
+	createLinearGradient(${1},${2},${3},${4});
+snippet aCS
+	addColorStop(${1}, '${2}');
+snippet dI
+	drawImage(${1},${2},${3},${4},${5})
+snippet .h
+	.height
+snippet .w
+	.width
+snippet (
+	(${1})
+snippet cR
+	clearRect(${1},${2},${3},${4});
+snippet gA
+	globalAlpha = ${1};
+snippet aEL
+	addEventListener('${1}', ${2}, ${3});
+
+# nodejs
+snippet us
+	'use strict';
