@@ -29,7 +29,8 @@ snippet beg
 	end
 
 snippet req require
-	require "${1}"${2}
+	require '${1}'
+	${2}
 snippet inc
 	include "${1}"  
 snippet reqr
@@ -100,6 +101,10 @@ snippet cla class .. initialize .. end
 		def initialize(${2:args})
 			${3}
 		end
+	end
+snippet cla class .. < ParentClass .. end
+	class ${1:`substitute(Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`} < ${2:ParentClass}
+		${3}
 	end
 snippet cla class .. < ParentClass .. initialize .. end
 	class ${1:`substitute(Filename(), '\(_\|^\)\(.\)', '\u\2', 'g')`} < ${2:ParentClass}
@@ -705,7 +710,7 @@ snippet flash
 snippet flashe
 	flash[:${1:error}] = "${2}"
 snippet habtm
-	has_and_belongs_to_many :${1:object}, :join_table => "${2:table_name}", :foreign_key => "${3}_id"${4}
+	has_and_belongs_to_many :${1:object}
 snippet hm
 	has_many :${1:object}
 snippet hmd
@@ -970,8 +975,6 @@ snippet itp
 	${2}
 snippet its
 	its(:${1:method}) { should ${2} }
-snippet itb
-	it { ${1} }
 snippet itsn
 	its(:${1:method}) { should_not ${2} }
 snippet desc
@@ -1016,6 +1019,8 @@ snippet shared
 	shared_examples "${1:shared examples name}" ${2}
 snippet itb
 	it_behaves_like "${1:shared examples name}"${2}
+snippet itb
+	it { ${1} }
 snippet lrs
 	last_response.status${1}
 snippet lrh
@@ -1037,7 +1042,8 @@ snippet bs
 	before_save :${1:method}
 #factory
 snippet fact
-	Factory.define :${1:model} do |${2:model}|
+	FactoryGirl.define do
+	  ${1}			
 	end
 snippet ua
 	update_attribute(:${1:attribute_name}, ${2:value})
@@ -1073,3 +1079,16 @@ snippet new
 	${1:reference} = ${2:ClassName}.new(${3:params})
 snippet ana
 	accepts_nested_attributes_for :${1:association}
+snippet em
+	embeds_many :${1:model}
+snippet eo
+	embeds_one :${1:model}
+#mongoid
+snippet imd
+	include Mongoid::Document
+snippet imt
+	include Mongoid::Timestamps
+snippet fd
+	field :${1}
+snippet pg
+	puts "***************************************#{${1}}*********************************************"
