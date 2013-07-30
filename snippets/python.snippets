@@ -10,7 +10,7 @@ snippet from
 # Module Docstring
 snippet docs
 	"""
-	File: ${1:`Filename('$1.py', 'foo.py')`}
+	File: ${1:`vim_snippets#Filename('$1.py', 'foo.py')`}
 	Author: `g:snips_author`
 	Email: `g:snips_email`
 	Github: `g:snips_github`
@@ -131,6 +131,9 @@ snippet ipdb
 # ipython debugger (pdbbb)
 snippet pdbbb
 	import pdbpp; pdbpp.set_trace()
+# python console debugger (pudb)
+snippet pudb
+	import pudb; pudb.set_trace()
 snippet pprint
 	import pprint; pprint.pprint(${1})${2}
 snippet "
@@ -182,3 +185,15 @@ snippet lc
 	logger.critical(${1:msg})
 snippet li
 	logger.info(${1:msg})
+snippet epydoc
+	"""
+	${1:Description}
+
+	@param ${2:param}: ${3: Description}
+	@type  $2: ${4: Type}
+
+	@return: ${5: Description}
+	@rtype : ${6: Type}
+
+	@raise e: ${7: Description}
+	"""
