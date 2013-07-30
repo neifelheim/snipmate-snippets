@@ -876,7 +876,7 @@ snippet sweeper
 snippet va validates_associated
 	validates_associated :${1:attribute}
 snippet va validates .., :acceptance => true
-	validates :${1:terms}, :acceptance => true
+	validates :${1:terms}, acceptance: true
 snippet vc
 	validates :${1:attribute}, :confirmation => true
 snippet ve
@@ -888,11 +888,11 @@ snippet vi
 snippet vl
 	validates :${1:attribute}, :length => { :in => ${2:3}..${3:20} }
 snippet vn
-	validates :${1:attribute}, :numericality => true
+	validates :${1:attribute}, numericality: true
 snippet vp
-	validates :${1:attribute}, :presence => true
+	validates :${1:attribute}, presence: true
 snippet vu
-	validates :${1:attribute}, :uniqueness => true
+	validates :${1:attribute}, uniqueness: true
 snippet format
 	format.${1:js|xml|html} { ${2} }
 snippet wc
@@ -1013,7 +1013,7 @@ snippet descm
 		${2:pending "Not implemented"}
 	end
 snippet cont
-	context "${1:message}" do
+	context "${1}" do
 		${2}
 	end
 snippet bef
@@ -1070,9 +1070,15 @@ snippet bc
 snippet bs
 	before_save :${1:method}
 #factory
-snippet fact
+snippet factd
 	FactoryGirl.define do
 	  ${1}			
+	end
+snippet seq
+	sequence(:${1}) {|n| "#{n}"}
+snippet fact
+	factory :${1} do
+		${2}
 	end
 snippet ua
 	update_attribute(:${1:attribute_name}, ${2:value})
@@ -1094,12 +1100,10 @@ snippet se
 	shared_examples "${1}" do
 		${2}
 	end
-snippet exp
-	expect(${1})
 snippet eo
 	error_on(:${1:attribute})
 snippet rsh
-	require "spec_helper"
+	require 'spec_helper'
 snippet rsc
 	RSpec.configure do |c|
 		c.${1}
@@ -1175,6 +1179,10 @@ snippet isvp
 	it { should validate_presence_of :${1} }
 snippet isvu
 	it { should validate_uniqueness_of :${1} }
+snippet ishi
+	it { should have_index_for(${1}: 1) }
+snippet ishiw
+	it { should have_index_for(${1}: 1).with_options(unique: true${2}) }
 #ShouldaMatchers#ActiveRecord
 snippet isana
 	it { should accept_nested_attributes_for :${1} }
@@ -1192,6 +1200,8 @@ snippet ishi
 	it { should have_db_index :${1} }
 snippet ishm
 	it { should have_many :${1} }
+snippet ishmw
+	it { should have_many(:${1}).with_dependent(:destroy) }
 snippet ishmt
 	it { should have_many(:${1}).through :${2} }
 snippet isho
@@ -1206,3 +1216,10 @@ snippet isresw
 	it { should respond_to(:${1}).with(${2}).arguments }
 snippet super_call
       ${1:super_class}.instance_method(:${2:method}).bind(self).call
+snippet isem
+	it { should embed_many :${1} }
+snippet isana
+	it { should accept_nested_attributes_for(:${1}) }
+#Devise
+snippet lar
+	load_and_authorize_resource	
